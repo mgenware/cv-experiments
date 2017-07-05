@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 import colorsys
 
 # load image
-img = cv2.imread('bluebird.jpg')
+img = cv2.imread('../_images/bluebird.jpg')
 # convert to HSV
 img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # extract H channel

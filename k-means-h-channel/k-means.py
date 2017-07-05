@@ -4,14 +4,14 @@ from matplotlib import pyplot as plt
 import colorsys
 
 # load image
-img = cv2.imread('bluebird.jpg')
+img = cv2.imread('../_images/bluebird.jpg')
 # convert to HSV
 img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # extract H channel
 data = np.float32(img.reshape((-1, 3)))
 data = data[:,0]
 
-# define criteria 
+# define criteria
 # http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_ml/py_kmeans/py_kmeans_opencv/py_kmeans_opencv.html
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 K = 4
