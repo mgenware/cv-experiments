@@ -2,20 +2,18 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 import colorsys
-from colormath.color_objects import LabColor
-from colormath.color_diff import delta_e_cie2000
-
-def lab2BGR(img):
-    return cv2.cvtColor(img, cv2.COLOR_Lab2BGR)
-
 
 # load image
 img = cv2.imread('../_images/bluebird.jpg')
 # convert to HSV
-blurred = cv2.GaussianBlur(img, (5, 5), 0)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+# extract H channel
+data = np.float32(img.reshape((-1, 3)))
+data = data[:,0]
 
-blocks = np.zeros((img.shape[0], img.shape[1], 1))
-blocks[0,0,0] = 1
-
-int noc = 1;
-int width = img.shape
+# plot
+hPlot = data.reshape((-1, 1))
+_, bins, patches = plt.hist(hPlot, 180, [0, 180])
+for bin, patch in zip(bins, patches):
+    plt.setp(patch, 'facecolor', colorsys.hsv_to_rgb(bin / 180, 1.0, 1.0))
+plt.show()
